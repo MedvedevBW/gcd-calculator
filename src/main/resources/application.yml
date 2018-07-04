@@ -1,0 +1,13 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+jsa:
+  rabbitmq:
+    exchange: jsa.answer
+    routingkey: jsa.answerkey
+    questionQueue: jsa.questionQueue
+    answerQueue: jsa.answerQueue
