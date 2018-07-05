@@ -1,25 +1,19 @@
 package com.bwsw.test.gcdcalculator.rabbitmq;
 
-import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
 @Component
 public class Producer<T extends Serializable> {
+    private static final Logger logger = LoggerFactory.getLogger(Producer.class);
 
-    @Autowired
-    private AmqpTemplate amqpTemplate;
-
-    @Value("${jsa.rabbitmq.exchange}")
-    private String exchange;
-
-    @Value("${jsa.rabbitmq.routingkey}")
-    private String routingKey;
-
-    public void produceMsg(T msg){
-        amqpTemplate.convertAndSend(exchange, routingKey, msg);
+    public void sendMessage(RabbitTemplate rabbitTemplate, String exchange, String routingKey, T message) {
+        logger.info("sendMessage(exchange: {}, routingKey: {}, message: {})", exchange, routingKey, message);
+        rabbitTemplate.convertAndSend(exchange, routingKey, message);
+        logger.info("The message has been sent to the queue.");
     }
 }

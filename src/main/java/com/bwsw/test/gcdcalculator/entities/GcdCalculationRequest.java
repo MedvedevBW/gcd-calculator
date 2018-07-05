@@ -1,26 +1,46 @@
 package com.bwsw.test.gcdcalculator.entities;
 
-public class GcdCalculationRequest {
-    private Long id;
-    private int firstNumber;
-    private int secondNumber;
+import java.io.Serializable;
 
-    public GcdCalculationRequest(Long id, int firstNumber, int secondNumber) {
+public final class GcdCalculationRequest implements Serializable {
+    private long first;
+    private long second;
+    private long id;
+
+    public GcdCalculationRequest() {}
+
+    public GcdCalculationRequest(long first, long second, long id) {
+        this.first = first;
+        this.second = second;
         this.id = id;
-        this.firstNumber = firstNumber;
-        this.secondNumber = secondNumber;
     }
 
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public int getFirstNumber() {
-        return firstNumber;
+    public long getSecond() {
+        return second;
     }
 
-    public int getSecondNumber() {
-        return secondNumber;
+    public long getFirst() {
+        return first;
+    }
+
+    public void setFirst(long first) {
+        this.first = first;
+    }
+
+    public void setSecond(long second) {
+        this.second = second;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String toString() {
+        return "GcdCalculationRequest( id: " + id +
+                ", first: " + first + ", second: " + second + ")";
     }
 }

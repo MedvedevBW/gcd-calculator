@@ -1,13 +1,28 @@
 spring:
   rabbitmq:
-    host: localhost
+    host: 127.0.0.1
     port: 5672
     username: guest
     password: guest
+    listener:
+      type: simple
+      simple:
+        max-concurrency: 3
+        concurrency: 2
+        retry:
+          initial-interval: 5000
 
-jsa:
+app:
   rabbitmq:
-    exchange: jsa.answer
-    routingkey: jsa.answerkey
-    questionQueue: jsa.questionQueue
-    answerQueue: jsa.answerQueue
+    exchange: answer
+    routingkey: answerkey
+    questionQueue: questionQueue
+    answerQueue: answerQueue
+
+logging:
+  level:
+    root: INFO
+    org:
+      hibernate: ERROR
+      springframework:
+        web: INFO
